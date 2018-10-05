@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello World!</title>
+  </head>
+
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+ 
+  <script>
+
+async function demo(node) {
+  node.setAttribute("class","collapsing");
+  }
+
+  async function showCard(){
+      var node = document.getElementById("collapseExample");
+      demo(node);
+      node.setAttribute("class","collapse show");
+    }
+
+    async function showCard2(){
+      var node = document.getElementById("collapseExample2");
+      demo(node);
+      node.setAttribute("class","collapse show");
+    }
+
+
+    function hello(text){
+        var txt = document.getElementById("user").value;
+        if (text != ""){
+          txt = text;
+        }
+
+var node = document.createElement("li");     
+node.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+var textnode = document.createTextNode(txt);         // Create a text node
+node.appendChild(textnode);              
+
+var span = document.createElement("span");    
+span.setAttribute("class","badge badge-primary badge-pill")
+var textnode = document.createTextNode("14");         // Create a text node
+span.appendChild(textnode);              
+node.appendChild(span); 
+
+document.getElementById("myList").appendChild(node);  
+    }
+    
+      var config = {
+apiKey: "AIzaSyDGLgypqAbyEplFGo-5hRmq7_Z-ZO0AkRs",
+authDomain: "prepara-festa.firebaseapp.com",
+databaseURL: "https://prepara-festa.firebaseio.com",
+projectId: "prepara-festa",
+storageBucket: "prepara-festa.appspot.com",
+messagingSenderId: "107964791696"
+};
+firebase.initializeApp(config);
+// Initialize Cloud Firestore through Firebase
+var db = firebase.firestore();
+// Disable deprecated features
+db.settings({
+timestampsInSnapshots: true
+});
+
+db.collection("users").add({
+first: "oto teste",
+last: "Lovelace",
+born: 1815
+})
+.then(function(docRef) {
+console.log("Document written with ID: ", docRef.id);
+})
+.catch(function(error) {
+console.error("Error adding document: ", error);
+});     
+    
+    </script>
+      
+  <body >
+      <div class="jumbotron">
+      
+    <h1 class="display-4">Preparando a Festa!</h1>   
+    <hr class="my-4"> 
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <div class="input-group mb-3">
+       
+        <input type="text" class="form-control" placeholder="Nome do produto" aria-label="Username" aria-describedby="basic-addon1" name = "user" id="user">
+        <button type="button" onclick="hello()" class="btn btn-dark">Adicionar</button>
+      </div>
+      
+      <p>
+          <a class="btn btn-primary" data-toggle="collapse" onclick="showCard()" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+             Bebidas
+          </a>
+          <a class="btn btn-primary" data-toggle="collapse" onclick="showCard2()" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Bebidas Outro Sabor
+             </a>
+
+
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="bg-default.jpg" alt="Card Image">
+                <div class="card-body">
+                  <h5 class="card-title">Refrigerante</h5>
+                  <p class="card-text">Clique no botão para adicionar Refrigerante a sua lista.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <button class="list-group-item" onclick="hello('Coca')">Coca-Cola</button>
+                  <button class="list-group-item" onclick="hello('Guarana')">Guarana</button>
+                  <button class="list-group-item" onclick="hello('Laranja')">Laranja</button>
+                </ul>
+              </div>
+        </div>      
+
+        <div class="collapse" id="collapseExample2">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="bg-default.jpg" alt="Card Image">
+                    <div class="card-body">
+                      <h5 class="card-title">Refrigerante</h5>
+                      <p class="card-text">Clique no botão para adicionar Refrigerante a sua lista.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <button class="list-group-item" onclick="hello('Coca')">Uva</button>
+                      <button class="list-group-item" onclick="hello('Guarana')">Limão</button>
+                      <button class="list-group-item" onclick="hello('Laranja')">Maçã</button>
+                    </ul>
+                  </div>
+            </div>      
+            
+
+
+
+
+      <div class="list-group" id="myList">
+        </div>  
+
+      </div>
+  </body>
+</html>
